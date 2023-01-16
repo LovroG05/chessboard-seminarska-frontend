@@ -32,6 +32,7 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
             console.log(result);
             const obj = JSON.parse(result);
             board1.position(obj.fen);
+            $("#next").text(obj.fen.slice(-1));
         })
         .catch(error => console.log('error', error));
 }
@@ -44,6 +45,7 @@ function onLoad() {
         const obj = JSON.parse(result);
         board1.position(obj.fen);
         $("#uuid").text(obj.uuid);
+        $("#next").text(obj.fen.slice(-1));
     })
     .catch(error => console.log('error', error));
 }
