@@ -6,13 +6,20 @@
     <!--  Including the chessboardjs files:-->
     <script src="./js/chessboard-1.0.0.js"></script>
     <link rel="stylesheet" href="./css/chessboard-1.0.0.min.css" />
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body onload="onLoad()">
-    <div>
-      <div id="board1" style="width: 600px"></div>
-      <p id="uuid"></p>
-      <p id="next"></p>
-      <p id="status"></p>
+    <div id="sidebyside">
+      <div id="left">
+        <div id="board1" style="width: 600px"></div>
+
+        <p id="next"></p>
+      </div>
+      <div id="right">
+        <p>sfdaas</p>
+      </div>
+      <!-- <p id="uuid"></p> -->
+      <!-- <p id="status"></p> -->
     </div>
   </body>
   <script src="./script.js"></script>

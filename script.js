@@ -1,3 +1,12 @@
+function printNextPlayer(playerLetter) {
+    if (playerLetter === "w") {
+        $("#next").text("WHITE's move");
+    } else {
+        $("#next").text("BLACK's move");
+    }
+}
+
+
 function onDrop (source, target, piece, newPos, oldPos, orientation) {
     console.log('Source: ' + source)
     console.log('Target: ' + target)
@@ -24,7 +33,6 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
         redirect: 'follow'
     };
 
-    let uuid = $("#uuid").text();
 
     fetch("http://localhost:4567/g/"+ uuid +"/move", requestOptions)
         .then(response => response.text())
@@ -32,8 +40,7 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
             console.log(result);
             const obj = JSON.parse(result);
             board1.position(obj.fen);
-            $("#next").text(obj.fen.slice(-1));
-            $("#status").text(obj.status);
+            printNextPlayer(obj.fen.slice(-1));
         })
         .catch(error => console.log('error', error));
 }
@@ -45,9 +52,8 @@ function onLoad() {
         console.log(result);
         const obj = JSON.parse(result);
         board1.position(obj.fen);
-        $("#uuid").text(obj.uuid);
-        $("#next").text(obj.fen.slice(-1));
-        $("#status").text(obj.status);
+        printNextPlayer(obj.fen.slice(-1));
+        uuid = obj.uuid;
     })
     .catch(error => console.log('error', error));
 }
@@ -60,3 +66,4 @@ var config = {
   
   
 var board1 = ChessBoard('board1', config);
+var uuid = "";

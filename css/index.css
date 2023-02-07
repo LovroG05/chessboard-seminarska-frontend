@@ -1,0 +1,29 @@
+body {
+    background-color: #383130;
+    color: antiquewhite;
+}
+
+#sidebyside {
+    display: flex;
+}
+
+#left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 70%;
+}
+
+#board1 {
+    size: 95%;
+    padding: 0;
+    margin: 0;
+}
+
+#right {
+    
+    padding: 30px;
+    flex: 30%;
+}
+
