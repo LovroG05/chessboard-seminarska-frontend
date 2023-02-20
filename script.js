@@ -6,6 +6,14 @@ function printNextPlayer(playerLetter) {
     }
 }
 
+function addToHist(history) {
+    $("#hist").empty();
+    for (let i = 0; i < history.length; i++) {
+        let color = history[i].figure.white ? "White ": "Black ";
+        $("#hist").append("<li>" + color + history[i].figure.name + " from (" + history[i].old_x + ", " + history[i].old_y + ") to ("+ history[i].new_x + ", " + history[i].new_y + ")</li>")
+    }
+}
+
 
 function onDrop (source, target, piece, newPos, oldPos, orientation) {
     console.log('Source: ' + source)
@@ -41,6 +49,7 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
             const obj = JSON.parse(result);
             board1.position(obj.fen);
             printNextPlayer(obj.fen.slice(-1));
+            addToHist(obj.history);
         })
         .catch(error => console.log('error', error));
 }

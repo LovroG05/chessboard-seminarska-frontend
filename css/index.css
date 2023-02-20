@@ -8,15 +8,10 @@ body {
 }
 
 #left {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex: 70%;
+    
 }
 
 #board1 {
-    size: 95%;
     padding: 0;
     margin: 0;
 }
@@ -27,3 +22,10 @@ body {
     flex: 30%;
 }
 
+#top {
+
+}
+
+#bottom {
+
+}
