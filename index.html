@@ -21,8 +21,24 @@
       <div id="right">
         <ul id="hist"></ul>
       </div>
-      <!-- <p id="uuid"></p> -->
-      <!-- <p id="status"></p> -->
+    </div>
+
+    <!-- <button onclick="openPromotePawnPopup()">test</button> -->
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <p>Izberi figuro</p>
+        <div>
+          <button onclick="promotePawnTo('Q')">Kraljica</button>
+          <button onclick="promotePawnTo('R')">Trdnjava</button>
+          <button onclick="promotePawnTo('B')">Lovec</button>
+          <button onclick="promotePawnTo('N')">Konj</button>
+        </div>
+      </div>
+
     </div>
   </body>
   <script src="./script.js"></script>

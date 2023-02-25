@@ -7,11 +7,57 @@ function printNextPlayer(playerLetter) {
 }
 
 function addToHist(history) {
+    ghistory = history;
     $("#hist").empty();
     for (let i = 0; i < history.length; i++) {
         let color = history[i].figure.white ? "White ": "Black ";
-        $("#hist").append("<li>" + color + history[i].figure.name + " from (" + history[i].old_x + ", " + history[i].old_y + ") to ("+ history[i].new_x + ", " + history[i].new_y + ")</li>")
+        let ox = parseInt(history[i].old_x, 10)+1;
+        let oy = parseInt(history[i].old_y, 10)+1;
+        let x = parseInt(history[i].new_x)+1;
+        let y = parseInt(history[i].new_y)+1;
+        $("#hist").append("<li>" + color + history[i].figure.name + " from (" + ox + ", " + oy + ") to ("+ x + ", " + y + ")</li>");
     }
+}
+
+function openPromotePawnPopup() {
+    $("#myModal").css("display", "block");
+}
+
+function promotePawnTo(fen) {
+    let move = ghistory[ghistory.length-1];
+    let x = move.new_x;
+    let y = move.new_y;
+    let iswhite = move.isWhites;
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "x": x,
+        "y": y,
+        "isWhite": iswhite,
+        "newFigureFEN": fen
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    $("#myModal").css("display", "none");
+
+    fetch("http://localhost:4567/g/"+uuid+"/promote", requestOptions)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result);
+            const obj = JSON.parse(result);
+            board1.position(obj.fen);
+            printNextPlayer(obj.fen.slice(-1));
+            addToHist(obj.history);
+        })
+        .catch(error => console.log('error', error));
+
 }
 
 
@@ -50,6 +96,7 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
             board1.position(obj.fen);
             printNextPlayer(obj.fen.slice(-1));
             addToHist(obj.history);
+            if (obj.pawnPromotion) openPromotePawnPopup();
         })
         .catch(error => console.log('error', error));
 }
@@ -76,3 +123,4 @@ var config = {
   
 var board1 = ChessBoard('board1', config);
 var uuid = "";
+var ghistory = "";
