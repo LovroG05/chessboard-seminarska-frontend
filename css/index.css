@@ -1,14 +1,10 @@
 body {
-    background-color: #383130;
+    background-color: #242221;
     color: antiquewhite;
 }
 
 #sidebyside {
     display: flex;
-}
-
-#left {
-    
 }
 
 #board1 {
@@ -17,17 +13,8 @@ body {
 }
 
 #right {
-    
     padding: 30px;
     flex: 30%;
-}
-
-#top {
-
-}
-
-#bottom {
-
 }
 
 /* The Modal (background) */

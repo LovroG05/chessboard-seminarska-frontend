@@ -16,6 +16,7 @@
         </div>
         <div id="bottom">
           <p id="next"></p>
+          <p id="stat"></p>
         </div>
       </div>
       <div id="right">
@@ -38,7 +39,14 @@
           <button onclick="promotePawnTo('N')">Konj</button>
         </div>
       </div>
+    </div>
 
+    <div id="gamestatusmodal" class="modal">
+      <div class="modal-content">
+        <p>Konec igre</p>
+        <p id="status"></p>
+        <a href="http://127.0.0.1:5500/index.html">Nova igra</a>
+      </div>
     </div>
   </body>
   <script src="./script.js"></script>

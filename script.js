@@ -23,6 +23,12 @@ function openPromotePawnPopup() {
     $("#myModal").css("display", "block");
 }
 
+function openEndGamePopup(status) {
+    $("#gamestatusmodal").css("display", "block");
+    $("#status").text(status);
+    $("#sidebyside").css("filter", "blur(5px)");
+}
+
 function promotePawnTo(fen) {
     let move = ghistory[ghistory.length-1];
     let x = move.new_x;
@@ -97,6 +103,10 @@ function onDrop (source, target, piece, newPos, oldPos, orientation) {
             printNextPlayer(obj.fen.slice(-1));
             addToHist(obj.history);
             if (obj.pawnPromotion) openPromotePawnPopup();
+            if (!["RUNNING", "WHITE_CHECK", "BLACK_CHECK"].includes(obj.status)) {
+                openEndGamePopup(obj.status);
+            }
+            $("#stat").text(obj.status);
         })
         .catch(error => console.log('error', error));
 }
@@ -110,6 +120,7 @@ function onLoad() {
         board1.position(obj.fen);
         printNextPlayer(obj.fen.slice(-1));
         uuid = obj.uuid;
+        $("#stat").text(obj.status);
     })
     .catch(error => console.log('error', error));
 }
